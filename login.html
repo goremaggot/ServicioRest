@@ -22,6 +22,8 @@ var boton =document.getElementById("login");
 			var sesion = JSON.parse(xmlhttp.responseText);
 	console.log("Entra2");
 					console.log(sesion.data.email);
+						window.alert("Datos OK");
+						window.location = "index.html"
 			}
 			else{
 				if (xmlhttp.readyState===4 && xmlhttp.status===400){

@@ -4,6 +4,33 @@
 <!--[if IE 8]><html class="lt-ie9"><![endif]-->
 <!--[if gt IE 8]><!--><html><!--<![endif]-->
 <head>
+  	<script type="text/javascript">
+  function conectar(){
+    var idform = document.getElementById("element_1");
+    var usuform = document.getElementById("element_2");
+    var baseurl= "http://127.0.0.1:8000/api/banco/login";
+  console.log("Entra");
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.open("POST",baseurl,true);
+  xmlhttp.setRequestHeader("Content-Type", "application/json");
+  var data = JSON.stringify({"email":"jonathan@banco.com", "password": "12345"});
+  xmlhttp.send(data);
+  xmlhttp.onreadystatechange=function(){
+    if (xmlhttp.readyState===4 && xmlhttp.status===200){
+    var sesion = JSON.parse(xmlhttp.responseText);
+console.log("Entra2");
+        var id = sesion.data.id;
+          console.log("id"+id);
+        var email = sesion.data.email;
+        console.log("email"+email);
+        idform.value=id;
+        usuform.value=email;
+        idform.disabled=true;
+        usuform.disabled=true;
+    }
+  }
+}
+	</script>
 <title>DreamzBank</title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="css/foundation.min.css">
@@ -28,7 +55,7 @@ Modernizr.load({
 <link rel="stylesheet" type="text/css" href="css/view.css" media="all">
 <script type="text/javascript" src="js/view.js"></script>
 </head>
-<body>
+<body onload="conectar()">
 <div class="wrapper">
   <div class="header">
     <div class="row">
@@ -37,8 +64,8 @@ Modernizr.load({
         <nav>
           <section>
             <ul class="sf-menu large-12">
-              <li class="active"><a href="index.html">Home</a></li>
-              <li><a href="crear.html">Crear Solicitud</a></li>
+              <li><a href="index.html">Home</a></li>
+              <li class="active"><a href="crear.html">Crear Solicitud</a></li>
               <li><a href="actualizar.html">Actualizar Solicitud</a></li>
               <li><a href="consulta.html">Consultar Solicitudes</a></li>
             </ul>
@@ -66,7 +93,7 @@ Modernizr.load({
   		</li>		<li id="li_2" >
   		<label class="description" for="element_2">Usuario </label>
   		<div>
-  			<input id="element_2" name="element_2" class="element text small" type="text" maxlength="255" value=""/>
+  			<input id="element_2" name="element_2" class="element text medium" type="text" maxlength="255" value=""/>
   		</div>
   		</li>		<li id="li_7" >
   		<label class="description" for="element_7">Ciudad </label>
