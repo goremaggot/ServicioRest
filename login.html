@@ -1,7 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-	<title>Login V6</title>
+	<script type="text/javascript">
+var boton =document.getElementById("login");
+
+		function conectar(){
+			var user = document.getElementById("username").value;
+			var pass = document.getElementById("pass").value;
+			var baseurl= "http://127.0.0.1:8000/api/banco/login";
+		console.log("Entra");
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.open("POST",baseurl,true);
+		xmlhttp.setRequestHeader("Content-Type", "application/json");
+		var data = JSON.stringify({"email":user, "password": pass});
+		console.log(data);
+		console.log(pass);
+
+		xmlhttp.send(data);
+		xmlhttp.onreadystatechange=function(){
+			if (xmlhttp.readyState===4 && xmlhttp.status===200){
+			var sesion = JSON.parse(xmlhttp.responseText);
+	console.log("Entra2");
+					console.log(sesion.data.email);
+			}
+			else{
+				if (xmlhttp.readyState===4 && xmlhttp.status===400){
+         		console.log("Entra2");
+						window.alert("Contraseña Erronea")
+				}
+			}
+
+		}
+	}
+	function validacampos(){
+		var user = document.getElementById("username");
+		var pass = document.getElementById("pass");
+		var boton =document.getElementById("login");
+    console.log(user.value.length);
+		console.log(pass.value.length);
+    if(user.value.length>10 && pass.value.length>=5){
+        boton.disabled = false;
+    }
+
+                         }
+
+function bloqueaboton(){
+	var boton =document.getElementById("login");
+			boton.disabled = true;
+}
+
+
+	</script>
+
+	<title>Login</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -27,7 +78,8 @@
 	<link rel="stylesheet" type="text/css" href="css/login/main.css">
 <!--===============================================================================================-->
 </head>
-<body>
+
+<body onload="bloqueaboton()">
 
 	<div class="limiter">
 		<div class="container-login100">
@@ -41,20 +93,19 @@
 					</span>
 
 					<div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
-						<input class="input100" type="text" name="username">
+						<input class="input100" type="text" name="username" id="username" onchange="validacampos()">
 						<span class="focus-input100" data-placeholder="Usuario"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
-						<input class="input100" type="password" name="pass">
+						<input class="input100" type="password" name="pass" id="pass" onchange="validacampos()">
 						<span class="focus-input100" data-placeholder="Contraseña"></span>
 					</div>
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Login
-						</button>
+					<input class="login100-form-btn" id="login" type="button" value="Login" onclick="conectar()" />
 					</div>
+
 
 					<ul class="login-more p-t-190">
 						<li class="m-b-8">
@@ -81,26 +132,5 @@
 			</div>
 		</div>
 	</div>
-
-
-	<div id="dropDownSelect1"></div>
-
-<!--===============================================================================================-->
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/daterangepicker/moment.min.js"></script>
-	<script src="vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
-	<script src="js/main.js"></script>
-
 </body>
 </html>
