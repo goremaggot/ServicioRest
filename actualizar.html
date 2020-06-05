@@ -4,7 +4,7 @@
 <!--[if IE 8]><html class="lt-ie9"><![endif]-->
 <!--[if gt IE 8]><!--><html><!--<![endif]-->
 <head>
-<title>Actualiza Solicitud</title>
+<title>Crear Solicitud</title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="css/foundation.min.css">
 <link rel="stylesheet" href="css/superfish.css">
@@ -63,6 +63,9 @@ var datmodif=document.getElementById("element_15");
     estado.value=solicitud.data.status;
     datcrea.value=solicitud.data.created_at;
     datmodif.value=solicitud.data.updated_at;
+    datcrea.disabled=true;
+    datmodif.disabled=true;
+    idsol.disabled=true;
     // idform.value=id;
     // usuform.value=email;
     // idform.disabled=true;
