@@ -30,8 +30,50 @@ console.log("Entra2");
     }
   }
 }
+
+function registrar(){
+  var idcli = document.getElementById("element_1");
+  var email= document.getElementById("element_2");
+  var ciudad = document.getElementById("element_7");
+  var dep = document.getElementById("element_3");
+  var nomclien= document.getElementById("element_4");
+  var dirclien= document.getElementById("element_5");
+  var telclien= document.getElementById("element_6");
+  var ingrcli= document.getElementById("element_8");
+  var valcred= document.getElementById("element_9");
+  var nomref= document.getElementById("element_10");
+  var telref= document.getElementById("element_11");
+  var xmlhttp = new XMLHttpRequest();
+  var baseurl= "http://127.0.0.1:8000/api/banco/credit/application/register";
+  xmlhttp.open("POST",baseurl,true);
+  xmlhttp.setRequestHeader("Content-Type", "application/json");
+  var jsonRequest = JSON.stringify({
+	"advisor_id" : idcli.value,
+    	"city": ciudad.value,
+    	"department": dep.value,
+    	"fullname_client": nomclien.value,
+    	"address_client": dirclien.value,
+    	"phone_client": telclien.value,
+    	"monthly_income": ingrcli.value,
+    	"credit_value": valcred.value,
+    	"fullname_reference": nomref.value,
+    	"phone_reference": telref.value,
+    	"email": email.value
+    });
+
+    console.log("jsonRequest "+jsonRequest);
+      xmlhttp.send(jsonRequest);
+
+      xmlhttp.onreadystatechange=function(){
+        if (xmlhttp.readyState===4 && xmlhttp.status===200){
+        var sesion = JSON.parse(xmlhttp.responseText);
+        console.log("jsonResponse "+JSON.stringify(sesion));
+        window.alert("Se crea Solicitud Numero  "+sesion.data.id+"  Para  "+sesion.data.fullname_client)
+        }
+      }
+}
 	</script>
-<title>DreamzBank</title>
+<title>Crear Solicitud</title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="css/foundation.min.css">
 <link rel="stylesheet" href="css/superfish.css">
@@ -85,52 +127,78 @@ Modernizr.load({
   		</div>
   			<ul >
 
-  					<li id="li_1" >
+  		<li id="li_1" >
   		<label class="description" for="element_1">ID </label>
   		<div>
   			<input id="element_1" name="element_1" class="element text small" type="text" maxlength="255" value=""/>
   		</div>
-  		</li>		<li id="li_2" >
-  		<label class="description" for="element_2">Usuario </label>
-  		<div>
-  			<input id="element_2" name="element_2" class="element text medium" type="text" maxlength="255" value=""/>
-  		</div>
+
   		</li>		<li id="li_7" >
   		<label class="description" for="element_7">Ciudad </label>
   		<div>
   		<select class="element select small" id="element_7" name="element_7">
   			<option value="" selected="selected"></option>
-  <option value="1" >Bogotá</option>
-  <option value="2" >Medellin</option>
+  <option value="Bogotá" >Bogotá</option>
+  <option value="Medellin" >Medellin</option>
 
   		</select>
   		</div>
-  		</li>		<li id="li_3" >
-  		<label class="description" for="element_3">Direccion </label>
+  		</li>
+      	<li id="li_3" >
+  		<label class="description" for="element_3">Departamento </label>
   		<div>
   			<input id="element_3" name="element_3" class="element text large" type="text" maxlength="255" value=""/>
   		</div>
   		</li>		<li id="li_4" >
-  		<label class="description" for="element_4">Telefono1 </label>
+  		<label class="description" for="element_4">Nombre Cliente </label>
   		<div>
   			<input id="element_4" name="element_4" class="element text medium" type="text" maxlength="255" value=""/>
   		</div>
   		</li>		<li id="li_5" >
-  		<label class="description" for="element_5">Telefono2 </label>
+  		<label class="description" for="element_5">Direccion Cliente </label>
   		<div>
   			<input id="element_5" name="element_5" class="element text medium" type="text" maxlength="255" value=""/>
   		</div>
   		</li>		<li id="li_6" >
-  		<label class="description" for="element_6">Valor Credito </label>
+  		<label class="description" for="element_6">Telefono Cliente </label>
   		<div>
-  			<input id="element_6" name="element_6" class="element text medium" type="text" maxlength="255" value=""/>
+  			<input id="element_6" name="element_6" class="element text medium" type="number" maxlength="255" value=""/>
   		</div>
   		</li>
+      <li id="li_8" >
+  		<label class="description" for="element_8">Ingresos Mensuales </label>
+  		<div>
+  			<input id="element_8" name="element_8" class="element text medium" type="text" maxlength="255" value=""/>
+  		</div>
+  		</li>
+      <li id="li_9" >
+      <label class="description" for="element_9">Valor Credito </label>
+      <div>
+        <input id="element_9" name="element_9" class="element text medium" type="text" maxlength="255" value=""/>
+      </div>
+      </li>
+      <li id="li_10" >
+      <label class="description" for="element_10">Nombre Referencia </label>
+      <div>
+        <input id="element_10" name="element_10" class="element text medium" type="text" maxlength="255" value=""/>
+      </div>
+      </li>
+      <li id="li_11" >
+      <label class="description" for="element_11">Telefono Referencia </label>
+      <div>
+        <input id="element_11" name="element_11" class="element text medium" type="number" maxlength="255" value=""/>
+      </div>
+      </li>
+    </li>		<li id="li_2" >
+    <label class="description" for="element_2">Email </label>
+    <div>
+      <input id="element_2" name="element_2" class="element text medium" type="text" maxlength="255" value=""/>
+    </div>
 
   					<li class="buttons">
   			    <input type="hidden" name="form_id" value="112522" />
 
-  				<input id="saveForm" class="button_text" type="submit" name="submit" value="Enviar" />
+  				<input id="saveForm" class="button_text" type="button" name="submit" value="Enviar" onclick="registrar()"/>
   		</li>
   			</ul>
   		</form>
