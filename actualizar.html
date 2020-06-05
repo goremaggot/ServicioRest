@@ -4,7 +4,7 @@
 <!--[if IE 8]><html class="lt-ie9"><![endif]-->
 <!--[if gt IE 8]><!--><html><!--<![endif]-->
 <head>
-<title>DreamzBank</title>
+<title>Actualiza Solicitud</title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="css/foundation.min.css">
 <link rel="stylesheet" href="css/superfish.css">
@@ -29,35 +29,40 @@ xmlhttp.onreadystatechange=function(){
   console.log("xmlhttp.status "+xmlhttp.status);
 if (xmlhttp.readyState===4 && xmlhttp.status===200){
 
-var idsol = document.getElementById("element_1");
-var dir = document.getElementById("element_4");
-var tf = document.getElementById("element_5");
-var dep = document.getElementById("element_3");
-var ciudad = document.getElementById("element_7");
-var ingr = document.getElementById("element_6");
 
-var valcr = document.getElementById("element_8");
-var nom = document.getElementById("element_9");
-var nref = document.getElementById("element_10");
-var estad = document.getElementById("element_11");
 
 
 var solicitud = JSON.parse(xmlhttp.responseText);
-console.log("Entra2");
-    var city = solicitud.data.city;
-      console.log("city "+city);
-    var fullname = solicitud.data.fullname_reference;
-    console.log("fullname "+fullname);
+var idsol = document.getElementById("element_1");
+var ciudad = document.getElementById("element_7");
+var dep = document.getElementById("element_3");
+var nomclien= document.getElementById("element_4");
+var dirclien= document.getElementById("element_5");
+var email= document.getElementById("element_6");
+var telclien= document.getElementById("element_8");
+var ingrmen= document.getElementById("element_9");
+var valcred = document.getElementById("element_10");
+var nomref= document.getElementById("element_11");
+var telfref =document.getElementById("element_12");
+var estado=document.getElementById("element_13");
+var datcrea=document.getElementById("element_14");
+var datmodif=document.getElementById("element_15");
+
+
     idsol.value = solicitud.data.id;
     ciudad.value=solicitud.data.city;
     dep.value=solicitud.data.department;
-    dir.value=solicitud.data.address;
-    tf.value=solicitud.data.phone;
-    ingr.value=solicitud.data.monthly_income;
-    valcr.value=solicitud.data.credit_value;
-    nom.value=solicitud.data.fullname_reference;
-    nref.value=solicitud.data.phone_reference;
-    estad.value=solicitud.data.status;
+    nomclien.value=solicitud.data.fullname_client;
+    dirclien.value=solicitud.data.address_client;
+    email.value=solicitud.data.email;
+    telclien.value=solicitud.data.phone_client;
+    ingrmen.value=solicitud.data.monthly_income;
+    valcred.value=solicitud.data.credit_value;
+    nomref.value=solicitud.data.fullname_reference;
+    telfref.value=solicitud.data.phone_reference;
+    estado.value=solicitud.data.status;
+    datcrea.value=solicitud.data.created_at;
+    datmodif.value=solicitud.data.updated_at;
     // idform.value=id;
     // usuform.value=email;
     // idform.disabled=true;
@@ -124,43 +129,67 @@ console.log("Entra2");
   			<input id="element_3" name="element_3" class="element text medium" type="text" maxlength="255" value=""/>
   		</div>
   		</li>		<li id="li_4" >
-  		<label class="description" for="element_4">Dirección</label>
+  		<label class="description" for="element_4">Nombre Cliente</label>
   		<div>
   			<input id="element_4" name="element_4" class="element text medium" type="text" maxlength="255" value=""/>
   		</div>
   		</li>		<li id="li_5" >
-  		<label class="description" for="element_5">Telefono</label>
+  		<label class="description" for="element_5">Direccion cliente</label>
   		<div>
   			<input id="element_5" name="element_5" class="element text medium" type="text" maxlength="255" value=""/>
   		</div>
   		</li>		<li id="li_6" >
-  		<label class="description" for="element_6">Ingresos Mensuales </label>
+  		<label class="description" for="element_6">Email </label>
   		<div>
   			<input id="element_6" name="element_6" class="element text medium" type="text" maxlength="255" value=""/>
   		</div>
   		</li>
       <li id="li_8" >
-  		<label class="description" for="element_8">Valor Credito </label>
+  		<label class="description" for="element_8">Telefono Cliente </label>
   		<div>
   			<input id="element_8" name="element_8" class="element text medium" type="text" maxlength="255" value=""/>
   		</div>
   		</li>
       <li id="li_9" >
-  		<label class="description" for="element_9">Nombre Completo </label>
+  		<label class="description" for="element_9">Ingresos Mensuales </label>
   		<div>
   			<input id="element_9" name="element_9" class="element text medium" type="text" maxlength="255" value=""/>
   		</div>
   		</li>
       <li id="li_10" >
-  		<label class="description" for="element_10">Numero Referencia </label>
+  		<label class="description" for="element_10">Valor Credito</label>
   		<div>
   			<input id="element_10" name="element_10" class="element text medium" type="text" maxlength="255" value=""/>
   		</div>
   		</li>
       <li id="li_11" >
-      <label class="description" for="element_11">Estado</label>
+      <label class="description" for="element_11">Nombre Referencia</label>
       <div>
         <input id="element_11" name="element_11" class="element text medium" type="text" maxlength="255" value=""/>
+      </div>
+      </li>
+      <li id="li_12" >
+      <label class="description" for="element_12">Telefono Referencia</label>
+      <div>
+        <input id="element_12" name="element_12" class="element text medium" type="text" maxlength="255" value=""/>
+      </div>
+      </li>
+      <li id="li_13" >
+      <label class="description" for="element_13">Estado</label>
+      <div>
+        <input id="element_13" name="element_13" class="element text medium" type="text" maxlength="255" value=""/>
+      </div>
+      </li>
+      <li id="li_14" >
+      <label class="description" for="element_14">Fecha Creación</label>
+      <div>
+        <input id="element_14" name="element_14" class="element text medium" type="text" maxlength="255" value=""/>
+      </div>
+      </li>
+      <li id="li_15" >
+      <label class="description" for="element_15">Fecha Ultima Actualizacion</label>
+      <div>
+        <input id="element_15" name="element_15" class="element text medium" type="text" maxlength="255" value=""/>
       </div>
       </li>
 
