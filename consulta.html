@@ -4,7 +4,7 @@
 <!--[if IE 8]><html class="lt-ie9"><![endif]-->
 <!--[if gt IE 8]><!--><html><!--<![endif]-->
 <head>
-<title>DreamzBank</title>
+<title>Consulta Solicitud</title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="css/foundation.min.css">
 <link rel="stylesheet" href="css/superfish.css">
@@ -49,14 +49,10 @@ Modernizr.load({
     </div>
 
     <table style="width:100%" id="tabla">
-      <tr>
-        <th>ID</th>
-        <th>Nombre Cliente</th>
-        <th>Direccion</th>
-        <th>Correo</th>
-        <th>Telefono Cliente</th>
-      </tr>
+
       <script>
+      var x="";
+      x += "<tr><th>ID</th><th>Nombre Cliente</th><th>Direccion</th><th>Correo</th><th>Telefono Cliente</th></tr>";
       var baseurl= "http://127.0.0.1:8000/api/banco/list/credit/application/advisor/1";
       console.log("Entra Actualizar");
       console.log(baseurl);
@@ -67,14 +63,14 @@ Modernizr.load({
         console.log("xmlhttp.status "+xmlhttp.status);
       if (xmlhttp.readyState===4 && xmlhttp.status===200){
       var solicitud = JSON.parse(xmlhttp.responseText);
-      var x="";
+
       for (i in solicitud.data) {
         x += "<tr>";
         x += "<td>"+solicitud.data[i].id+"</td>";
         x += "<td>"+solicitud.data[i].fullname_client+"</td>";
         x += "<td>"+solicitud.data[i].address_client+"</td>";
         x += "<td>"+solicitud.data[i].email+"</td>";
-        x += "<td>"+solicitud.data[i].email+"</td>";
+        x += "<td>"+solicitud.data[i].phone_client+"</td>";
         x += "</tr>";
         document.getElementById("tabla").innerHTML = x;
 
