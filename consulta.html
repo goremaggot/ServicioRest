@@ -15,7 +15,7 @@
 <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,300|Droid+Serif:400,300' rel='stylesheet' type='text/css'>
 <script src="js/vendor/custom.modernizr.js"></script>
 
-<script>
+<script >
 Modernizr.load({
     // test if browser understands media queries
     test: Modernizr.mq('only all'),
@@ -48,22 +48,43 @@ Modernizr.load({
       </div>
     </div>
 
-    <table style="width:100%">
+    <table style="width:100%" id="tabla">
       <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Age</th>
+        <th>ID</th>
+        <th>Nombre Cliente</th>
+        <th>Direccion</th>
+        <th>Correo</th>
+        <th>Telefono Cliente</th>
       </tr>
-      <tr>
-        <td>Jill</td>
-        <td>Smith</td>
-        <td><a href="index.html">50</a></td>
-      </tr>
-      <tr>
-        <td>Eve</td>
-        <td>Jackson</td>
-        <td><a href="index.html">60</a></td>
-      </tr>
+      <script>
+      var baseurl= "http://127.0.0.1:8000/api/banco/list/credit/application/advisor/1";
+      console.log("Entra Actualizar");
+      console.log(baseurl);
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.open("GET",baseurl,true);
+      xmlhttp.send();
+      xmlhttp.onreadystatechange=function(){
+        console.log("xmlhttp.status "+xmlhttp.status);
+      if (xmlhttp.readyState===4 && xmlhttp.status===200){
+      var solicitud = JSON.parse(xmlhttp.responseText);
+      var x="";
+      for (i in solicitud.data) {
+        x += "<tr>";
+        x += "<td>"+solicitud.data[i].id+"</td>";
+        x += "<td>"+solicitud.data[i].fullname_client+"</td>";
+        x += "<td>"+solicitud.data[i].address_client+"</td>";
+        x += "<td>"+solicitud.data[i].email+"</td>";
+        x += "<td>"+solicitud.data[i].email+"</td>";
+        x += "</tr>";
+        document.getElementById("tabla").innerHTML = x;
+
+      }
+
+
+      }
+    }
+
+        </script>
     </table>
 
 
