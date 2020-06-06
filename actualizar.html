@@ -131,6 +131,53 @@ xmlhttp.onreadystatechange=function(){
 
 }
 
+function borrar(){
+  var idsol = document.getElementById("element_1");
+  var ciudad = document.getElementById("element_7");
+  var dep = document.getElementById("element_3");
+  var nomclien= document.getElementById("element_4");
+  var dirclien= document.getElementById("element_5");
+  var email= document.getElementById("element_6");
+  var telclien= document.getElementById("element_8");
+  var ingrmen= document.getElementById("element_9");
+  var valcred = document.getElementById("element_10");
+  var nomref= document.getElementById("element_11");
+  var telfref =document.getElementById("element_12");
+  var estado=document.getElementById("element_13");
+  var datcrea=document.getElementById("element_14");
+  var datmodif=document.getElementById("element_15");
+  var baseurl= "http://127.0.0.1:8000/api/banco/data/credit/"+idsol.value;
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.open("DELETE",baseurl,true);
+  xmlhttp.send();
+  xmlhttp.onreadystatechange=function(){
+    if (xmlhttp.readyState===4 && xmlhttp.status===200){
+      var solicitud = JSON.parse(xmlhttp.responseText);
+      console.log("jsonResponse "+JSON.stringify(solicitud));
+      var spaces= "";
+      idsol.value = spaces;
+      ciudad.value=spaces;
+      dep.value=spaces;
+      nomclien.value=spaces;
+      dirclien.value=spaces;
+      email.value=spaces;
+      telclien.value=spaces;
+      ingrmen.value=spaces;
+      valcred.value=spaces;
+      nomref.value=spaces;
+      telfref.value=spaces;
+      estado.value=spaces;
+      datcrea.value=spaces;
+      datmodif.value=spaces;
+      datcrea.disabled=false;
+      datmodif.disabled=false;
+      idsol.disabled=false;
+      window.alert(solicitud.data.message);
+
+    }
+}
+}
+
 </script>
 <!--[if lt IE 9]>
 <link rel="stylesheet" href="css/ie-fixes.css">
@@ -264,6 +311,7 @@ xmlhttp.onreadystatechange=function(){
 
   				<input id="consulta" type="button" name="submit" value="Consultar"  onclick="consultar()" />
           <input id="actualiza"  type="button" name="submit2" value="Actualizar" onclick="actualizar()" />
+          <input id="borra"  type="button" name="submit3" value="Eliminar" onclick="borrar()" />
   		</li>
   			</ul>
   		</form>
