@@ -4,7 +4,7 @@
 <!--[if IE 8]><html class="lt-ie9"><![endif]-->
 <!--[if gt IE 8]><!--><html><!--<![endif]-->
 <head>
-<title>Crear Solicitud</title>
+<title>Actualizar Solicitud</title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="css/foundation.min.css">
 <link rel="stylesheet" href="css/superfish.css">
@@ -28,10 +28,6 @@ xmlhttp.send();
 xmlhttp.onreadystatechange=function(){
   console.log("xmlhttp.status "+xmlhttp.status);
 if (xmlhttp.readyState===4 && xmlhttp.status===200){
-
-
-
-
 var solicitud = JSON.parse(xmlhttp.responseText);
 var idsol = document.getElementById("element_1");
 var ciudad = document.getElementById("element_7");
@@ -47,8 +43,7 @@ var telfref =document.getElementById("element_12");
 var estado=document.getElementById("element_13");
 var datcrea=document.getElementById("element_14");
 var datmodif=document.getElementById("element_15");
-
-
+var btnConsulta=document.getElementById("consulta");
     idsol.value = solicitud.data.id;
     ciudad.value=solicitud.data.city;
     dep.value=solicitud.data.department;
@@ -72,6 +67,68 @@ var datmodif=document.getElementById("element_15");
     // usuform.disabled=true;
 }
 }
+}
+
+function actualizar(){
+
+  var idsol = document.getElementById("element_1");
+  var ciudad = document.getElementById("element_7");
+  var dep = document.getElementById("element_3");
+  var nomclien= document.getElementById("element_4");
+  var dirclien= document.getElementById("element_5");
+  var email= document.getElementById("element_6");
+  var telclien= document.getElementById("element_8");
+  var ingrmen= document.getElementById("element_9");
+  var valcred = document.getElementById("element_10");
+  var nomref= document.getElementById("element_11");
+  var telfref =document.getElementById("element_12");
+  var estado=document.getElementById("element_13");
+  var datcrea=document.getElementById("element_14");
+  var datmodif=document.getElementById("element_15");
+  var baseurl= "http://127.0.0.1:8000/api/banco/credit/application/update";
+console.log("Entra");
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.open("PUT",baseurl,true);
+xmlhttp.setRequestHeader("Content-Type", "application/json");
+  var jsonRequest = JSON.stringify({
+    "id": idsol.value,
+    "city": ciudad.value,
+    "department": dep.value,
+    "fullname_client": nomclien.value,
+    "address_client": dirclien.value,
+    "email": email.value,
+    "phone_client": telclien.value,
+    "monthly_income": ingrmen.value,
+    "credit_value": valcred.value,
+    "fullname_reference": nomref.value,
+    "phone_reference": telfref.value,
+    "status": estado.value
+});
+console.log("jsonRequest "+jsonRequest);
+xmlhttp.send(jsonRequest);
+xmlhttp.onreadystatechange=function(){
+  if (xmlhttp.readyState===4 && xmlhttp.status===200){
+  var solicitud = JSON.parse(xmlhttp.responseText);
+    var idsol = document.getElementById("element_1");
+   window.alert("Solicitud "+idsol.value+" Actualizada Correctamente")
+   idsol.value = solicitud.data.id;
+   ciudad.value=solicitud.data.city;
+   dep.value=solicitud.data.department;
+   nomclien.value=solicitud.data.fullname_client;
+   dirclien.value=solicitud.data.address_client;
+   email.value=solicitud.data.email;
+   telclien.value=solicitud.data.phone_client;
+   ingrmen.value=solicitud.data.monthly_income;
+   valcred.value=solicitud.data.credit_value;
+   nomref.value=solicitud.data.fullname_reference;
+   telfref.value=solicitud.data.phone_reference;
+   estado.value=solicitud.data.status;
+   datcrea.value=solicitud.data.created_at;
+   datmodif.value=solicitud.data.updated_at;
+   console.log("jsonResponse "+JSON.stringify(solicitud));
+  }
+}
+
 }
 
 </script>
@@ -178,9 +235,15 @@ var datmodif=document.getElementById("element_15");
       </div>
       </li>
       <li id="li_13" >
-      <label class="description" for="element_13">Estado</label>
+      <label class="description" for="element_13">Estado </label>
       <div>
-        <input id="element_13" name="element_13" class="element text medium" type="text" maxlength="255" value=""/>
+      <select class="element select medium" id="element_13" name="element_13">
+        <option value="" selected="selected"></option>
+    <option value="Pendiente" >Pendiente</option>
+    <option value="En Proceso" >En Proceso</option>
+    <option value="Cerrado" >Cerrado</option>
+
+      </select>
       </div>
       </li>
       <li id="li_14" >
@@ -200,7 +263,7 @@ var datmodif=document.getElementById("element_15");
   			    <input type="hidden" name="form_id" value="112522" />
 
   				<input id="consulta" type="button" name="submit" value="Consultar"  onclick="consultar()" />
-          <input id="actualiza"  type="button" name="submit2" value="Actualizar" />
+          <input id="actualiza"  type="button" name="submit2" value="Actualizar" onclick="actualizar()" />
   		</li>
   			</ul>
   		</form>
