@@ -26,7 +26,7 @@ var boton =document.getElementById("login");
 						window.location = "index.html"
 			}
 			else{
-				if (xmlhttp.readyState===4 && xmlhttp.status===400){
+				if (xmlhttp.readyState===4 && xmlhttp.status===422){
          		console.log("Entra2");
 						window.alert("Contraseña Erronea")
 				}
