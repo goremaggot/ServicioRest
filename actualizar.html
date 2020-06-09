@@ -65,6 +65,12 @@ var btnConsulta=document.getElementById("consulta");
     // usuform.value=email;
     // idform.disabled=true;
     // usuform.disabled=true;
+     console.log("jsonResponse "+JSON.stringify(solicitud));
+}
+else {
+  if (xmlhttp.readyState===4 && xmlhttp.status===500){
+    window.alert("Solicitud No Existe")
+  }
 }
 }
 }
